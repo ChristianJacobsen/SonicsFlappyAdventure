@@ -8,6 +8,8 @@
     margin-top: -2.5em;
     width: em(50px);
     height: em(50px);
-    background: blue;
+    background: url("../images/sonic_sprite.png") no-repeat;
+    background-position: 0px 0px;
+    background-size: em(50px);
     transform: translateZ(0);
 }
