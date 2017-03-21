@@ -1,8 +1,9 @@
 window.Game = (function () {
     "use strict";
 
-    var PIPE_TIME = 3;
-    var GAP_HEIGHT = 15;
+    var PIPE_TIME = 2;
+    var GAP_HEIGHT = 17;
+    var PIPE_WIDTH = 8;
 
     /**
      * Main game class.
@@ -13,8 +14,17 @@ window.Game = (function () {
         this.el = el;
         this.player = new window.Player(this.el.find(".Player"), this);
         this.isPlaying = false;
+        this.score = 0;
+        this.highscore = 0;
+        this.scoreElem = $(".Score > p");
         this.pipe_timer = 0;
-        this.pipes = [];
+        this.nextPipe = 0;
+
+        let pipe1 = new window.Pipe($(".Pipe1"), this);
+        let pipe2 = new window.Pipe($(".Pipe2"), this);
+        let pipe3 = new window.Pipe($(".Pipe3"), this);
+
+        this.pipes = [pipe1, pipe2, pipe3];
 
         // Cache a bound onFrame since we need it each frame.
         this.onFrame = this.onFrame.bind(this);
@@ -43,9 +53,11 @@ window.Game = (function () {
         this.player.onFrame(delta);
 
         // Update pipes
-        this.pipes.filter(pipe => {
-            pipe.onFrame();
-        });
+        for (let i = 0; i < this.pipes.length; i++) {
+            if (this.pipes[i].active) {
+                this.pipes[i].onFrame();
+            }
+        }
 
         // Request next frame.
         window.requestAnimationFrame(this.onFrame);
@@ -59,34 +71,46 @@ window.Game = (function () {
             // Reset timer
             this.pipe_timer = 0;
 
-            // Create elements
-            let pipeElem = $("<div class=\"Pipe\"></div>");
-            let topElem = $("<div class=\"Top\"></div>");
-            let gapElem = $("<div class=\"Gap\"></div>");
-            let botElem = $("<div class=\"Bot\"></div>");
-
-            // Append inner elements to the pipe element
-            pipeElem.append(topElem);
-            pipeElem.append(gapElem);
-            pipeElem.append(botElem);
+            let pipe = this.pipes[this.nextPipe % 3];
+            this.nextPipe++;
 
             // Randomize the height of each segment of pipe
-            let gapCenter = Math.random() * (this.WORLD_HEIGHT - (GAP_HEIGHT * 2)) + (GAP_HEIGHT * 2);
-            let topHeight = gapCenter - GAP_HEIGHT;
-            let botHeight = this.WORLD_HEIGHT - gapCenter + GAP_HEIGHT;
+            let gapCenter = Math.random() * ((this.WORLD_HEIGHT * 0.8) - (this.WORLD_HEIGHT * 0.2)) + (this.WORLD_HEIGHT * 0.2);
+            let topHeight = gapCenter - (GAP_HEIGHT / 2);
+            let botHeight = this.WORLD_HEIGHT - GAP_HEIGHT - topHeight;
 
-            topElem.css("height", topHeight + "em");
-            gapElem.css("height", GAP_HEIGHT + "em");
-            botElem.css("height", botHeight + "em");
+            pipe.el.children(".Top").css("height", topHeight + "em");
+            pipe.el.children(".Gap").css("height", GAP_HEIGHT + "em");
+            pipe.el.children(".Bot").css("height", botHeight + "em");
 
-            // Create the pipe object
-            let pipe = new window.Pipe(pipeElem, this);
+            pipe.pos.x = this.WORLD_WIDTH;
 
-            // Append the pipe element to the game canvas
-            this.el.append(pipeElem);
+            // Bounding boxes
+            // Pipe bounding box
+            pipe.pipeBoundingBox.topLeft.x = this.WORLD_WIDTH - (PIPE_WIDTH / 2);
+            pipe.pipeBoundingBox.topLeft.y = -99999;
+            pipe.pipeBoundingBox.botRight.x = this.WORLD_WIDTH + (PIPE_WIDTH / 2);
+            pipe.pipeBoundingBox.botRight.y = this.WORLD_HEIGHT;
+            // Top bounding box
+            pipe.topBoundingBox.topLeft.x = pipe.pipeBoundingBox.topLeft.x;
+            pipe.topBoundingBox.topLeft.y = pipe.pipeBoundingBox.topLeft.y;
+            pipe.topBoundingBox.botRight.x = pipe.pipeBoundingBox.botRight.x;
+            pipe.topBoundingBox.botRight.y = topHeight;
+            // Gap bounding box
+            pipe.gapBoundingBox.topLeft.x = pipe.pipeBoundingBox.topLeft.x;
+            pipe.gapBoundingBox.topLeft.y = topHeight;
+            pipe.gapBoundingBox.botRight.x = pipe.pipeBoundingBox.botRight.x
+            pipe.gapBoundingBox.botRight.y = gapCenter + (GAP_HEIGHT / 2);
+            // Bot bounding box
+            pipe.botBoundingBox.topLeft.x = pipe.pipeBoundingBox.topLeft.x;
+            pipe.botBoundingBox.topLeft.y = pipe.gapBoundingBox.botRight.y;
+            pipe.botBoundingBox.botRight.x = pipe.pipeBoundingBox.botRight.x;
+            pipe.botBoundingBox.botRight.y = pipe.pipeBoundingBox.botRight.y;
 
-            // Push the pipe object into the pipes array
-            this.pipes.push(pipe);
+            // Show, set point and activate
+            pipe.el.show();
+            pipe.point = true;
+            pipe.active = true;
         }
     };
 
@@ -108,8 +132,17 @@ window.Game = (function () {
     Game.prototype.reset = function () {
         this.player.reset();
 
-        $(".Pipe").remove();
-        this.pipes = [];
+        for (let i = 0; i < this.pipes.length; i++) {
+            this.pipes[i].active = false;
+            this.pipes[i].el.hide();
+        }
+
+        if (this.highscore < this.score) {
+            this.highscore = this.score;
+        }
+
+        this.score = 0;
+        this.scoreElem.text(0);
     };
 
     /**
