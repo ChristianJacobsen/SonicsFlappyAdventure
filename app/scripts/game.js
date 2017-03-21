@@ -17,7 +17,7 @@ window.Game = (function () {
         this.score = 0;
         this.highscore = 0;
         this.scoreElem = $(".Score > p");
-        this.pipe_timer = 0;
+        this.pipeTimer = 0;
         this.nextPipe = 0;
 
         let pipe1 = new window.Pipe($(".Pipe1"), this);
@@ -46,7 +46,7 @@ window.Game = (function () {
         this.lastFrame = now;
 
         // Pipe timer
-        this.pipe_timer += delta;
+        this.pipeTimer += delta;
         this.pipe();
 
         // Update game entities.
@@ -67,9 +67,9 @@ window.Game = (function () {
      * Checks if a pipe should be spawned and spawns if so.
      */
     Game.prototype.pipe = function () {
-        if (PIPE_TIME < this.pipe_timer) {
+        if (PIPE_TIME < this.pipeTimer) {
             // Reset timer
-            this.pipe_timer = 0;
+            this.pipeTimer = 0;
 
             let pipe = this.pipes[this.nextPipe % 3];
             this.nextPipe++;

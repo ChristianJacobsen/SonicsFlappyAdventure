@@ -6,7 +6,6 @@ window.Player = (function () {
     // All these constants are in em"s, multiply by 10 pixels
     // for 1024x576px canvas.
     var JUMP = 0.7;
-    var TIMER = 0;
     var TIMER_LIMIT = 0.3;
     var WIDTH = 5;
     var HEIGHT = 5;
@@ -29,7 +28,7 @@ window.Player = (function () {
                 x: 0,
                 y: 0
             }
-        }
+        };
         this.speed = 0;
         this.timer = 0;
     };
@@ -52,7 +51,7 @@ window.Player = (function () {
         this.speed += delta * 2;
 
         // Jump on SPACE if timer is not set
-        if (Controls.keys.space && this.timer === 0) {
+        if ((Controls.keys.space || Controls.keys.leftmouse) && this.timer === 0) {
             this.timer = delta;
             this.speed = -JUMP;
         }
@@ -81,7 +80,7 @@ window.Player = (function () {
     Player.prototype.intersects = function (box) {
         return (this.boundingBox.topLeft.x < box.botRight.x && box.topLeft.x < this.boundingBox.botRight.x &&
             this.boundingBox.topLeft.y < box.botRight.y && box.topLeft.y < this.boundingBox.botRight.y);
-    }
+    };
 
     Player.prototype.checkCollisions = function () {
         // Ground
