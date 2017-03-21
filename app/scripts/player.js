@@ -5,11 +5,13 @@ window.Player = (function () {
 
     // All these constants are in em"s, multiply by 10 pixels
     // for 1024x576px canvas.
-    var SPEED = 30; // * 10 pixels per second
+    var JUMP = 0.6;
+    var TIMER = 0;
+    var TIMER_LIMIT = 0.5;
     var WIDTH = 5;
     var HEIGHT = 5;
-    var INITIAL_POSITION_X = 30;
-    var INITIAL_POSITION_Y = 25;
+    var INITIAL_POSITION_X = 51.2;
+    var INITIAL_POSITION_Y = 28.8;
 
     var Player = function (el, game) {
         this.el = el;
@@ -18,6 +20,8 @@ window.Player = (function () {
             x: 0,
             y: 0
         };
+        this.speed = 0;
+        this.timer = 0;
     };
 
     /**
@@ -26,21 +30,26 @@ window.Player = (function () {
     Player.prototype.reset = function () {
         this.pos.x = INITIAL_POSITION_X;
         this.pos.y = INITIAL_POSITION_Y;
+        this.speed = 0;
     };
 
     Player.prototype.onFrame = function (delta) {
-        if (Controls.keys.right) {
-            this.pos.x += delta * SPEED;
+        this.speed += delta;
+
+        if (Controls.keys.space && this.timer === 0) {
+            this.timer = delta;
+            this.speed = -JUMP;
         }
-        if (Controls.keys.left) {
-            this.pos.x -= delta * SPEED;
+
+        if (this.timer !== 0) {
+            this.timer += delta;
+
+            if (TIMER_LIMIT < this.timer) {
+                this.timer = 0;
+            }
         }
-        if (Controls.keys.down) {
-            this.pos.y += delta * SPEED;
-        }
-        if (Controls.keys.up) {
-            this.pos.y -= delta * SPEED;
-        }
+
+        this.pos.y += this.speed;
 
         this.checkCollisionWithBounds();
 
@@ -49,10 +58,10 @@ window.Player = (function () {
     };
 
     Player.prototype.checkCollisionWithBounds = function () {
-        if (this.pos.x < 0 ||
-            this.pos.x + WIDTH > this.game.WORLD_WIDTH ||
-            this.pos.y < 0 ||
-            this.pos.y + HEIGHT > this.game.WORLD_HEIGHT) {
+        if (this.pos.x - (WIDTH / 2) < 0 ||
+            this.game.WORLD_WIDTH < this.pos.x + (WIDTH / 2) ||
+            this.pos.y - (HEIGHT / 2) < 0 ||
+            this.game.WORLD_HEIGHT < this.pos.y + (HEIGHT / 2)) {
             return this.game.gameover();
         }
     };
