@@ -93,31 +93,19 @@ window.Player = (function () {
         for (let i = 0; i < this.game.pipes.length; i++) {
             let pipe = this.game.pipes[i];
 
-            if (pipe.active && pipe.point) {
+            if (pipe.active) {
                 // Pipe
                 if (this.intersects(pipe.pipeBoundingBox)) {
 
-                    if (this.intersects(pipe.topBoundingBox)) {
-                        console.log("TOP");
-                    }
+                    if (pipe.gapStartY < this.boundingBox.topLeft.y &&
+                        this.boundingBox.botRight.y < pipe.gapEndY) {
+                        if (pipe.point) {
+                            pipe.point = false;
+                            this.game.score++;
+                            this.game.scoreElem.text(this.game.score);
+                        }
 
-                    if (this.intersects(pipe.botBoundingBox)) {
-                        console.log("BOTTOM");
-                    }
-
-                    // Top and bot
-                    if (this.intersects(pipe.topBoundingBox) || this.intersects(pipe.botBoundingBox)) {
-                        console.log("HERE");
-                        return this.game.gameover();
-                    }
-                    // Gap
-                    else if (this.intersects(pipe.gapBoundingBox)) {
-                        pipe.point = false;
-                        this.game.score++;
-                        this.game.scoreElem.text(this.game.score);
-                    }
-                    // Collision out of scope
-                    else {
+                    } else {
                         return this.game.gameover();
                     }
                 }

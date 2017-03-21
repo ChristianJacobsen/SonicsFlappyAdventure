@@ -21,37 +21,9 @@ window.Pipe = (function () {
                 x: 0,
                 y: 0
             }
-        }
-        this.topBoundingBox = {
-            topLeft: {
-                x: 0,
-                y: 0
-            },
-            botRight: {
-                x: 0,
-                y: 0
-            }
-        }
-        this.gapBoundingBox = {
-            topLeft: {
-                x: 0,
-                y: 0
-            },
-            botRight: {
-                x: 0,
-                y: 0
-            }
-        }
-        this.botBoundingBox = {
-            topLeft: {
-                x: 0,
-                y: 0
-            },
-            botRight: {
-                x: 0,
-                y: 0
-            }
-        }
+        };
+        this.gapStartY = 0;
+        this.gapEndY = 0;
     };
 
     Pipe.prototype.onFrame = function () {
@@ -59,12 +31,6 @@ window.Pipe = (function () {
         this.pos.x -= SPEED;
         this.pipeBoundingBox.topLeft.x -= SPEED;
         this.pipeBoundingBox.botRight.x -= SPEED;
-        this.topBoundingBox.topLeft.x -= SPEED;
-        this.topBoundingBox.botRight.x -= SPEED;
-        this.gapBoundingBox.topLeft.x -= SPEED;
-        this.gapBoundingBox.botRight.x -= SPEED;
-        this.botBoundingBox.topLeft.x -= SPEED;
-        this.botBoundingBox.botRight.x -= SPEED;
 
         this.checkCollisionWithBounds();
 

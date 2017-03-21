@@ -85,27 +85,14 @@ window.Game = (function () {
 
             pipe.pos.x = this.WORLD_WIDTH;
 
-            // Bounding boxes
+            pipe.gapStartY = topHeight;
+            pipe.gapEndY = gapCenter + (GAP_HEIGHT / 2);
+
             // Pipe bounding box
             pipe.pipeBoundingBox.topLeft.x = this.WORLD_WIDTH - (PIPE_WIDTH / 2);
             pipe.pipeBoundingBox.topLeft.y = -99999;
             pipe.pipeBoundingBox.botRight.x = this.WORLD_WIDTH + (PIPE_WIDTH / 2);
             pipe.pipeBoundingBox.botRight.y = this.WORLD_HEIGHT;
-            // Top bounding box
-            pipe.topBoundingBox.topLeft.x = pipe.pipeBoundingBox.topLeft.x;
-            pipe.topBoundingBox.topLeft.y = pipe.pipeBoundingBox.topLeft.y;
-            pipe.topBoundingBox.botRight.x = pipe.pipeBoundingBox.botRight.x;
-            pipe.topBoundingBox.botRight.y = topHeight;
-            // Gap bounding box
-            pipe.gapBoundingBox.topLeft.x = pipe.pipeBoundingBox.topLeft.x;
-            pipe.gapBoundingBox.topLeft.y = topHeight;
-            pipe.gapBoundingBox.botRight.x = pipe.pipeBoundingBox.botRight.x
-            pipe.gapBoundingBox.botRight.y = gapCenter + (GAP_HEIGHT / 2);
-            // Bot bounding box
-            pipe.botBoundingBox.topLeft.x = pipe.pipeBoundingBox.topLeft.x;
-            pipe.botBoundingBox.topLeft.y = pipe.gapBoundingBox.botRight.y;
-            pipe.botBoundingBox.botRight.x = pipe.pipeBoundingBox.botRight.x;
-            pipe.botBoundingBox.botRight.y = pipe.pipeBoundingBox.botRight.y;
 
             // Show, set point and activate
             pipe.el.show();
