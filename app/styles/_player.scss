@@ -1,3 +1,15 @@
+@keyframes play {
+    100% {
+        background-position: em(-100px);
+    }
+}
+
+@keyframes jump {
+    100% {
+        background-position: em(-255px);
+    }
+}
+
 .Player {
     // Absolutely position entities at 0,0 and use transform to
     // move it around.
@@ -9,7 +21,12 @@
     width: em(50px);
     height: em(50px);
     background: url("../images/sonic_sprite.png") no-repeat;
-    background-position: 0px 0px;
-    background-size: em(50px);
+    background-position-x: left;
+    background-position-y: center;
+    background-size: em(255px);
     transform: translateZ(0);
+    animation-name: play;
+    animation-duration: 0.6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: steps(2);
 }

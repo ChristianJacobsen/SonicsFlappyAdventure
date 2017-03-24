@@ -83,15 +83,15 @@ window.Game = (function () {
             pipe.el.children(".Gap").css("height", GAP_HEIGHT + "em");
             pipe.el.children(".Bot").css("height", botHeight + "em");
 
-            pipe.pos.x = this.WORLD_WIDTH;
+            pipe.pos.x = this.WORLD_WIDTH + 10;
 
             pipe.gapStartY = topHeight;
             pipe.gapEndY = gapCenter + (GAP_HEIGHT / 2);
 
             // Pipe bounding box
-            pipe.pipeBoundingBox.topLeft.x = this.WORLD_WIDTH - (PIPE_WIDTH / 2);
+            pipe.pipeBoundingBox.topLeft.x = pipe.pos.x - (PIPE_WIDTH / 2);
             pipe.pipeBoundingBox.topLeft.y = -99999;
-            pipe.pipeBoundingBox.botRight.x = this.WORLD_WIDTH + (PIPE_WIDTH / 2);
+            pipe.pipeBoundingBox.botRight.x = pipe.pos.x + (PIPE_WIDTH / 2);
             pipe.pipeBoundingBox.botRight.y = this.WORLD_HEIGHT;
 
             // Show, set point and activate

@@ -11,6 +11,9 @@ window.Player = (function () {
     var HEIGHT = 5;
     var INITIAL_POSITION_X = 51.2;
     var INITIAL_POSITION_Y = 28.8;
+    var JUMPANIM_TIME = 600;
+    var JUMP_ROTATION = -45;
+    var ROTATION_DECAY = 2;
 
     var Player = function (el, game) {
         this.el = el;
@@ -30,7 +33,9 @@ window.Player = (function () {
             }
         };
         this.speed = 0;
+        this.rotation = 0;
         this.timer = 0;
+        this.animTimeout = undefined;
     };
 
     /**
@@ -40,20 +45,29 @@ window.Player = (function () {
         this.pos.x = INITIAL_POSITION_X;
         this.pos.y = INITIAL_POSITION_Y;
         this.speed = 0;
+        this.rotation = 0;
         this.boundingBox.topLeft.x = this.pos.x - (WIDTH / 2);
         this.boundingBox.topLeft.y = this.pos.y - (HEIGHT / 2);
         this.boundingBox.botRight.x = this.pos.x + (WIDTH / 2);
         this.boundingBox.botRight.y = this.pos.y + (HEIGHT / 2);
+
+        this.el.css("animation-play-state", "running");
+        this.el.css("background-position-x", "left");
+        this.el.css("animation-name", "play");
+        this.el.css("animation-timing-function", "steps(2)");
     };
 
     Player.prototype.onFrame = function (delta) {
         // Gravity working against speed
         this.speed += delta * 2;
+        this.rotation += ROTATION_DECAY;
 
         // Jump on SPACE if timer is not set
         if ((Controls.keys.space || Controls.keys.leftmouse) && this.timer === 0) {
             this.timer = delta;
             this.speed = -JUMP;
+            this.rotation = JUMP_ROTATION;
+            this.jumpAnim();
         }
 
         // Increase the timer if counting
@@ -74,7 +88,34 @@ window.Player = (function () {
         this.checkCollisions();
 
         // Update UI
-        this.el.css("transform", "translateZ(0) translate(" + this.pos.x + "em, " + this.pos.y + "em)");
+        this.el.css("transform", "translateZ(0) translate(" + this.pos.x + "em, " + this.pos.y + "em) rotate(" + this.rotation + "deg)");
+    };
+
+    Player.prototype.jumpAnim = function () {
+        if (this.animTimeout !== undefined) {
+            clearTimeout(this.animTimeout);
+        }
+
+        this.el.css("background-position-x", "50%");
+        this.el.css("animation-name", "jump");
+        this.el.css("animation-timing-function", "steps(3)");
+
+        let elem = this.el;
+        this.animTimeout = setTimeout(function () {
+            elem.css("background-position-x", "left");
+            elem.css("animation-name", "play");
+            elem.css("animation-timing-function", "steps(2)");
+        }, JUMPANIM_TIME);
+    };
+
+    Player.prototype.gameover = function () {
+        if (this.animTimeout !== undefined) {
+            clearTimeout(this.animTimeout);
+        }
+
+        this.el.css("animation-play-state", "paused");
+
+        return this.game.gameover();
     };
 
     Player.prototype.intersects = function (box) {
@@ -85,7 +126,7 @@ window.Player = (function () {
     Player.prototype.checkCollisions = function () {
         // Ground
         if (this.game.WORLD_HEIGHT < this.pos.y + (HEIGHT / 2)) {
-            return this.game.gameover();
+            return this.gameover();
         }
 
         // Pipes
@@ -105,7 +146,7 @@ window.Player = (function () {
                         }
 
                     } else {
-                        return this.game.gameover();
+                        return this.gameover();
                     }
                 }
             }

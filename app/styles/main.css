@@ -1,64 +1,114 @@
-.Player {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 5em;
-	height: 5em;
-	background: blue;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/main\.scss}line{font-family:\000034}}
+body {
+  background: black;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/main\.scss}line{font-family:\000038}}
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_game-canvas\.scss}line{font-family:\000032}}
+.GameCanvas {
+  font-size: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 102.4em;
+  height: 57.6em;
+  margin-left: -51.2em;
+  margin-top: -28.8em;
+  overflow: hidden;
+  background: url("../images/waterfallgrass.gif") no-repeat center center fixed;
+  background-size: cover;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_player\.scss}line{font-family:\000031}}
+.Player {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: -2.5em;
+  margin-top: -2.5em;
+  width: 5em;
+  height: 5em;
+  background: url("../images/sonic_sprite.png") no-repeat;
+  background-position: 0px 0px;
+  background-size: 5em;
+  transform: translateZ(0);
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_pipe\.scss}line{font-family:\000031}}
+.Pipe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: -4em;
+  width: 8em;
+  height: 100%;
+  transform: translateZ(0);
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_pipe\.scss}line{font-family:\0000313}}
+.Top,
+.Bot {
+  background-color: red;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss}line{font-family:\000032}}
 .Scoreboard {
-	position: absolute;
-	left: 50%;
-	top: 10em;
-	height: 30em;
-	width: 40em;
-	margin-left: -20em;
-	box-sizing: border-box;
-	background: purple;
-	text-align: center;
-	-webkit-transform: translate(0, -40em);
-	-webkit-transition: -webkit-transform 0.5s;
+  position: absolute;
+  left: 50%;
+  top: 10em;
+  height: 30em;
+  width: 40em;
+  margin-left: -20em;
+  box-sizing: border-box;
+  background: purple;
+  text-align: center;
+  transform: translate(0, -40em);
+  transition: transform 0.5s;
 }
 
 /**
-* Reset transform to animate it into the correct spot on the screen.
-*/
+ * Reset transform to animate it into the correct spot on the screen.
+ */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss}line{font-family:\0000322}}
 .Scoreboard.is-visible {
-	-webkit-transform: none;
+  transform: none;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss}line{font-family:\0000326}}
 .Scoreboard-restart {
-	margin-top: 20em;
-	font-size: inherit;
-	padding: 0.4em 1.5em;
-	border: 0.2em solid white;
-	background: none;
-	cursor: pointer;
+  margin-top: 20em;
+  font-size: inherit;
+  padding: 0.4em 1.5em;
+  border: 0.2em solid white;
+  background: none;
+  cursor: pointer;
 }
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss}line{font-family:\0000336}}
 .Scoreboard-restartText {
-font-family: 'Comic Sans MS', serif;
-font-size: 2.4em;
-color: white;
+  font-family: 'Comic Sans MS', serif;
+  font-size: 2.4em;
+  color: white;
 }
-body {
-background: black;
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_score\.scss}line{font-family:\000031}}
+.Score {
+  position: absolute;
+  left: 50%;
 }
-.browsehappy {
-margin: 0.2em 0;
-background: ?#?ccc?;
-color: #000;
-padding: 0.2em 0;
-}
-.GameCanvas {
-font-size: 10px;
-position: absolute;
-left: 50%;
-top: 50%;
-width: 102.4em;
-height: 57.6em;
-margin-left: -51.2em;
-margin-top: -28.8em;
-overflow: hidden;
-background: red;
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_score\.scss}line{font-family:\000036}}
+.Score > p {
+  position: relative;
+  left: -50%;
+  text-align: center;
+  color: white;
+  font-size: 7em;
 }
