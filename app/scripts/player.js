@@ -14,6 +14,7 @@ window.Player = (function () {
     var JUMPANIM_TIME = 600;
     var JUMP_ROTATION = -45;
     var ROTATION_DECAY = 2;
+    var MAX_ROTATION = 90;
 
     var Player = function (el, game) {
         this.el = el;
@@ -61,6 +62,10 @@ window.Player = (function () {
         // Gravity working against speed
         this.speed += delta * 2;
         this.rotation += ROTATION_DECAY;
+
+        if (MAX_ROTATION < this.rotation) {
+            this.rotation = MAX_ROTATION;
+        }
 
         // Jump on SPACE if timer is not set
         if ((Controls.keys.space || Controls.keys.leftmouse) && this.timer === 0) {
@@ -125,7 +130,7 @@ window.Player = (function () {
 
     Player.prototype.checkCollisions = function () {
         // Ground
-        if (this.game.WORLD_HEIGHT < this.pos.y + (HEIGHT / 2)) {
+        if ((this.game.WORLD_HEIGHT - this.game.GROUND_HEIGHT) < this.pos.y + (HEIGHT / 2)) {
             return this.gameover();
         }
 

@@ -28,9 +28,9 @@ window.Pipe = (function () {
 
     Pipe.prototype.onFrame = function () {
         // Apply speed to x position
-        this.pos.x -= SPEED;
-        this.pipeBoundingBox.topLeft.x -= SPEED;
-        this.pipeBoundingBox.botRight.x -= SPEED;
+        this.pos.x -= this.game.PIPE_GROUND_SPEED;
+        this.pipeBoundingBox.topLeft.x -= this.game.PIPE_GROUND_SPEED;
+        this.pipeBoundingBox.botRight.x -= this.game.PIPE_GROUND_SPEED;
 
         this.checkCollisionWithBounds();
 

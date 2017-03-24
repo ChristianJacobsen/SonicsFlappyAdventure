@@ -19,6 +19,7 @@ window.Game = (function () {
         this.scoreElem = $(".Score > p");
         this.pipeTimer = 0;
         this.nextPipe = 0;
+        this.ground = new window.Ground(this.el.find(".Ground"), this);
 
         let pipe1 = new window.Pipe($(".Pipe1"), this);
         let pipe2 = new window.Pipe($(".Pipe2"), this);
@@ -49,7 +50,7 @@ window.Game = (function () {
         this.pipeTimer += delta;
         this.pipe();
 
-        // Update game entities.
+        // Update player
         this.player.onFrame(delta);
 
         // Update pipes
@@ -58,6 +59,9 @@ window.Game = (function () {
                 this.pipes[i].onFrame();
             }
         }
+
+        // Update ground
+        this.ground.onFrame();
 
         // Request next frame.
         window.requestAnimationFrame(this.onFrame);
@@ -155,6 +159,8 @@ window.Game = (function () {
      */
     Game.prototype.WORLD_WIDTH = 102.4;
     Game.prototype.WORLD_HEIGHT = 57.6;
+    Game.prototype.PIPE_GROUND_SPEED = 0.35;
+    Game.prototype.GROUND_HEIGHT = 3.5;
 
     return Game;
 })();

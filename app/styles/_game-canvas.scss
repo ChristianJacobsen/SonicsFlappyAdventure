@@ -14,5 +14,5 @@
     margin-top: (em(-576px) / 2); // Don't draw outside this box.
     overflow: hidden; // Some graphics
     background: url("../images/waterfallgrass.gif") no-repeat center center fixed;
-    background-size: cover;
+    background-size: 100% 100%;
 }

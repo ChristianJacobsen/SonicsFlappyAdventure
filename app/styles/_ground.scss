@@ -1,0 +1,10 @@
+.Ground {
+    position: absolute;
+    bottom: 0;
+    background: url("../images/ground.png") repeat-x;
+    background-size: auto em(105px);
+    width: em(1285px);
+    height: em(35px);
+    z-index: 1;
+    transform: translateZ(0);
+}
