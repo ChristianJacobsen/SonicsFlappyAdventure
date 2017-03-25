@@ -1,0 +1,21 @@
+.Speaker {
+    position: absolute;
+    left: em(10px);
+    top: em(10px);
+    z-index: 4;
+    background: url("../images/speaker.png") no-repeat center center;
+    background-size: contain;
+    width: em(50px);
+    height: em(50px);
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.Speaker:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+.Mute {
+    background: url("../images/speaker-mute.png") no-repeat center center;
+    background-size: contain;
+    background-color: rgba(255, 255, 255, 0.4);
+}

@@ -13,25 +13,46 @@ window.Game = (function () {
      * @constructor
      */
     var Game = function (el) {
-        this.el = el;
-        this.player = new window.Player(this.el.find(".Player"), this);
-        this.isPlaying = false;
-        this.score = 0;
-        this.highscore = 0;
-        this.scoreElem = this.el.find(".Score > p");
-        this.scoreboard = new window.Scoreboard(this.el.find(".Scoreboard"), this);
-        this.pipeFrameCount = 0;
-        this.nextPipe = 0;
-        this.ground = new window.Ground(this.el.find(".Ground"), this);
+        this.el = el; // Game canvas
+        this.player = new window.Player(this.el.find(".Player"), this); // Player
+        this.isPlaying = false; // Playing flag
+        this.score = 0; // Current score
+        this.highscore = 0; // Highscore
+        this.scoreElem = this.el.find(".Score > p"); // Current score element
+        this.scoreboard = new window.Scoreboard(this.el.find(".Scoreboard"), this); // Scoreboard
+        this.pipeFrameCount = 0; // Increment every frame
+        this.nextPipe = 0; // Next pipe in array to select when spawning a pipe
+        this.ground = new window.Ground(this.el.find(".Ground"), this); // Ground
+        this.mute = false; // Mute flag
+        this.speakerElem = this.el.find(".Speaker"); // Speaker button
+        this.firstRun = true; // Flag indicating whether this is the first run or not
 
+        // Audio
+        // Background
+        this.audioBackground = this.el.find(".BackgroundMusic")[0];
+        // Crash
+        this.audioCrash = this.el.find(".crashSound")[0];
+        // Jump
+        this.audioJump = this.el.find(".jumpSound")[0];
+        // Button
+        this.audioButton = this.el.find(".buttonSound")[0];
+        // Ring
+        this.audioRing = this.el.find(".ringSound")[0];
+
+        // Click event on speaker button
+        let game = this;
+        this.speakerElem.on("click", function () {
+            game.toggleSound(game);
+        });
+
+        // Create pipes
         this.pipes = [];
-
         for (let i = 0; i < PIPE_COUNT; i++) {
             this.pipes.push(new window.Pipe($(".Pipe" + (i + 1) + ""), this));
         }
 
+        // Create clouds
         this.clouds = [];
-
         for (let i = 0; i < CLOUD_COUNT; i++) {
             this.clouds.push(new window.Cloud($(".Cloud" + (i + 1) + ""), this));
         }
@@ -125,6 +146,39 @@ window.Game = (function () {
     Game.prototype.addPoint = function () {
         this.score++;
         this.scoreElem.text(this.score);
+        this.audioRing.play();
+    };
+
+    /**
+     * Play the jump sound for the player
+     */
+    Game.prototype.jump = function () {
+        this.audioJump.pause();
+        this.audioJump.currentTime = 0;
+        this.audioJump.play();
+    };
+
+    /**
+     * Mute or unmute sound
+     */
+    Game.prototype.toggleSound = function (game) {
+        if (game.mute) {
+            game.speakerElem.removeClass("Mute");
+            game.audioBackground.volume = 1.0;
+            game.audioButton.volume = 1.0;
+            game.audioCrash.volume = 1.0;
+            game.audioJump.volume = 1.0;
+            game.audioRing.volume = 1.0;
+        } else {
+            game.speakerElem.addClass("Mute");
+            game.audioBackground.volume = 0.0;
+            game.audioButton.volume = 0.0;
+            game.audioCrash.volume = 0.0;
+            game.audioJump.volume = 0.0;
+            game.audioRing.volume = 0.0;
+        }
+
+        game.mute = !game.mute;
     };
 
     /**
@@ -138,6 +192,22 @@ window.Game = (function () {
         this.lastFrame = +new Date() / 1000;
         window.requestAnimationFrame(this.onFrame);
         this.isPlaying = true;
+
+        // Play button sound if not the first time, since then the Restart button was pressed
+        if (!this.firstRun) {
+            this.audioButton.play();
+
+            // Play background music
+            let game = this;
+            setTimeout(function () {
+                game.audioBackground.loop = true;
+                game.audioBackground.play();
+            }, 250);
+        } else {
+            this.firstRun = false;
+            this.audioBackground.loop = true;
+            this.audioBackground.play();
+        }
     };
 
     /**
@@ -159,12 +229,21 @@ window.Game = (function () {
      * Signals that the game is over.
      */
     Game.prototype.gameover = function () {
-        this.isPlaying = false;
+        this.isPlaying = false; // Set playing flag to false
 
+        // Stop the background music
+        this.audioBackground.pause();
+        this.audioBackground.currentTime = 0;
+
+        // Play the crash sound
+        this.audioCrash.play();
+
+        // Update highscore if applicable
         if (this.highscore < this.score) {
             this.highscore = this.score;
         }
 
+        // Hide current score and show scoreboard
         this.scoreElem.hide();
         this.scoreboard.show();
     };

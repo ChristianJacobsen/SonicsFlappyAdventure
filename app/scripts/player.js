@@ -72,6 +72,7 @@ window.Player = (function () {
             this.timer = delta;
             this.speed = -JUMP;
             this.rotation = JUMP_ROTATION;
+            this.game.jump();
             this.jumpAnim();
         }
 
