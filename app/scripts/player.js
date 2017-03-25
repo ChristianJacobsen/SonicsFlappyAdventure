@@ -146,7 +146,7 @@ window.Player = (function () {
                     if (pipe.gapStartY < this.boundingBox.topLeft.y &&
                         this.boundingBox.botRight.y < pipe.gapEndY) {
                         if (pipe.point) {
-                            pipe.point = false;
+                            pipe.collect();
                             this.game.addPoint();
                         }
 

@@ -41,7 +41,7 @@ window.Game = (function () {
 
         // Click event on speaker button
         let game = this;
-        this.speakerElem.on("click", function () {
+        this.speakerElem.on("click tap", function () {
             game.toggleSound(game);
         });
 
@@ -134,6 +134,7 @@ window.Game = (function () {
             pipe.pipeBoundingBox.botRight.y = this.WORLD_HEIGHT;
 
             // Show, set point and activate
+            pipe.gapEl.removeClass("collectedGap");
             pipe.el.show();
             pipe.point = true;
             pipe.active = true;

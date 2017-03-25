@@ -16,3 +16,23 @@
     background: url("../images/stone.jpg");
     background-size: 75%;
 }
+
+@keyframes spin {
+    100% {
+        background-position: em(-445px);
+    }
+}
+
+.Gap {
+    background: url("../images/ring_sprite.png") no-repeat;
+    background-position-x: left;
+    background-position-y: center;
+    background-size: em(450px);
+    animation: spin 1.0s steps(6) infinite;
+    animation-play-state: running;
+}
+
+.collectedGap {
+    background: none;
+    animation-play-state: paused;
+}

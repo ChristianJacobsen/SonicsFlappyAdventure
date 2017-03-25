@@ -22,6 +22,7 @@ window.Pipe = (function () {
         };
         this.gapStartY = 0;
         this.gapEndY = 0;
+        this.gapEl = this.el.find(".Gap");
     };
 
     Pipe.prototype.onFrame = function () {
@@ -35,6 +36,11 @@ window.Pipe = (function () {
         // Update UI
         this.el.css("transform", "translateZ(0) translate(" + this.pos.x + "em, " + this.pos.y + "em)");
     };
+
+    Pipe.prototype.collect = function () {
+        this.point = false;
+        this.gapEl.addClass("collectedGap");
+    }
 
     Pipe.prototype.checkCollisionWithBounds = function () {
         if (this.pos.x < -10) {
