@@ -1,5 +1,9 @@
 $base-font-size: 10px;
-
 @function em($px, $base: $base-font-size) {
     @return ($px / $base) * 1em;
+}
+
+@font-face {
+    font-family: "Press Start 2P";
+    src: url(../fonts/PressStart2P-Regular.ttf);
 }

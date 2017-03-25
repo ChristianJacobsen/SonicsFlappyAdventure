@@ -1,7 +1,7 @@
 window.Game = (function () {
     "use strict";
 
-    var PIPE_TIME = 2;
+    var PIPE_FRAME_COUNT = 120;
     var GAP_HEIGHT = 17;
     var PIPE_WIDTH = 8;
     var CLOUD_COUNT = 4;
@@ -18,8 +18,9 @@ window.Game = (function () {
         this.isPlaying = false;
         this.score = 0;
         this.highscore = 0;
-        this.scoreElem = $(".Score > p");
-        this.pipeTimer = 0;
+        this.scoreElem = this.el.find(".Score > p");
+        this.scoreboard = new window.Scoreboard(this.el.find(".Scoreboard"), this);
+        this.pipeFrameCount = 0;
         this.nextPipe = 0;
         this.ground = new window.Ground(this.el.find(".Ground"), this);
 
@@ -55,7 +56,7 @@ window.Game = (function () {
         this.lastFrame = now;
 
         // Pipe timer
-        this.pipeTimer += delta;
+        this.pipeFrameCount++;
         this.pipe();
 
         // Update player
@@ -84,9 +85,9 @@ window.Game = (function () {
      * Checks if a pipe should be spawned and spawns if so.
      */
     Game.prototype.pipe = function () {
-        if (PIPE_TIME < this.pipeTimer) {
+        if (PIPE_FRAME_COUNT < this.pipeFrameCount) {
             // Reset timer
-            this.pipeTimer = 0;
+            this.pipeFrameCount = 0;
 
             let pipe = this.pipes[this.nextPipe % 3];
             this.nextPipe++;
@@ -119,10 +120,19 @@ window.Game = (function () {
     };
 
     /**
+     * Adds a point to the current score
+     */
+    Game.prototype.addPoint = function () {
+        this.score++;
+        this.scoreElem.text(this.score);
+    };
+
+    /**
      * Starts a new game.
      */
     Game.prototype.start = function () {
         this.reset();
+        this.scoreElem.show();
 
         // Restart the onFrame loop
         this.lastFrame = +new Date() / 1000;
@@ -141,10 +151,6 @@ window.Game = (function () {
             this.pipes[i].el.hide();
         }
 
-        if (this.highscore < this.score) {
-            this.highscore = this.score;
-        }
-
         this.score = 0;
         this.scoreElem.text(0);
     };
@@ -155,16 +161,12 @@ window.Game = (function () {
     Game.prototype.gameover = function () {
         this.isPlaying = false;
 
-        // Should be refactored into a Scoreboard class.
-        var that = this;
-        var scoreboardEl = this.el.find(".Scoreboard");
-        scoreboardEl
-            .addClass("is-visible")
-            .find(".Scoreboard-restart")
-            .one("click", function () {
-                scoreboardEl.removeClass("is-visible");
-                that.start();
-            });
+        if (this.highscore < this.score) {
+            this.highscore = this.score;
+        }
+
+        this.scoreElem.hide();
+        this.scoreboard.show();
     };
 
     /**

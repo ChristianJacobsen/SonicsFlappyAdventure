@@ -24,7 +24,9 @@ window.Controls = (function () {
             .on("keydown", this._onKeyDown.bind(this))
             .on("keyup", this._onKeyUp.bind(this))
             .on("mousedown", this._onMouseDown.bind(this))
-            .on("mouseup", this._onMouseUp.bind(this));
+            .on("mouseup", this._onMouseUp.bind(this))
+            .on("touchstart", this._onTouchStart.bind(this))
+            .on("touchend", this._onTouchEnd.bind(this));
     };
 
     Controls.prototype._onKeyDown = function (e) {
@@ -57,6 +59,14 @@ window.Controls = (function () {
             this.keys.leftmouse = false;
             return false;
         }
+    };
+
+    Controls.prototype._onTouchStart = function () {
+        this.keys.leftmouse = true;
+    };
+
+    Controls.prototype._onTouchEnd = function () {
+        this.keys.leftmouse = false;
     };
 
     // Export singleton.

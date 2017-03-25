@@ -19,9 +19,6 @@ window.Cloud = (function () {
         this.pos.x = this.game.WORLD_WIDTH + Math.random() * 20;
         this.pos.y = Math.random() * (this.game.WORLD_HEIGHT * 0.3);
         this.speed = Math.random() * (0.15 - 0.05) + 0.05;
-
-        console.log(this.pos);
-        console.log(this.speed);
     };
 
     Cloud.prototype.onFrame = function () {

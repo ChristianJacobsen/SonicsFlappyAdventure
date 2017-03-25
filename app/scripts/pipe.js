@@ -1,8 +1,6 @@
 window.Pipe = (function () {
     "use strict";
 
-    var SPEED = 0.35;
-
     var Pipe = function (el, game) {
         this.active = false;
         this.point = false;

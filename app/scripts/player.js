@@ -146,8 +146,7 @@ window.Player = (function () {
                         this.boundingBox.botRight.y < pipe.gapEndY) {
                         if (pipe.point) {
                             pipe.point = false;
-                            this.game.score++;
-                            this.game.scoreElem.text(this.game.score);
+                            this.game.addPoint();
                         }
 
                     } else {
