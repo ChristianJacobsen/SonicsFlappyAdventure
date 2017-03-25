@@ -4,6 +4,7 @@
 $(function () {
     "use strict";
 
+    // Create the game
     var gameElem = $(".GameCanvas");
     var game = new window.Game(gameElem);
 
@@ -27,5 +28,6 @@ $(function () {
         resizeCanvas();
     };
 
+    // Start the game
     game.start();
 });

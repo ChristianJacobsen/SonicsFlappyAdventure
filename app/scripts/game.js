@@ -1,11 +1,11 @@
 window.Game = (function () {
     "use strict";
 
-    var PIPE_FRAME_COUNT = 120;
-    var GAP_HEIGHT = 17;
-    var PIPE_WIDTH = 8;
-    var CLOUD_COUNT = 4;
-    var PIPE_COUNT = 3;
+    const PIPE_FRAME_COUNT = 120; // Frame interval for a pipe to spawn
+    const GAP_HEIGHT = 17; // Height of gap in pipes
+    const PIPE_WIDTH = 8; // Width of pipes
+    const CLOUD_COUNT = 4; // How many clouds
+    const PIPE_COUNT = 3; // How many pipes
 
     /**
      * Main game class.
@@ -76,7 +76,7 @@ window.Game = (function () {
             delta = now - this.lastFrame;
         this.lastFrame = now;
 
-        // Pipe timer
+        // Pipe check
         this.pipeFrameCount++;
         this.pipe();
 
@@ -122,8 +122,10 @@ window.Game = (function () {
             pipe.el.children(".Gap").css("height", GAP_HEIGHT + "em");
             pipe.el.children(".Bot").css("height", botHeight + "em");
 
+            // Set initial x-axis position
             pipe.pos.x = this.WORLD_WIDTH + 10;
 
+            // Set the Y coordinates of the gap
             pipe.gapStartY = topHeight;
             pipe.gapEndY = gapCenter + (GAP_HEIGHT / 2);
 
@@ -133,8 +135,10 @@ window.Game = (function () {
             pipe.pipeBoundingBox.botRight.x = pipe.pos.x + (PIPE_WIDTH / 2);
             pipe.pipeBoundingBox.botRight.y = this.WORLD_HEIGHT;
 
-            // Show, set point and activate
+            // Restore the ring animation
             pipe.gapEl.removeClass("collectedGap");
+
+            // Show, set point and activate
             pipe.el.show();
             pipe.point = true;
             pipe.active = true;
@@ -145,15 +149,16 @@ window.Game = (function () {
      * Adds a point to the current score
      */
     Game.prototype.addPoint = function () {
-        this.score++;
-        this.scoreElem.text(this.score);
-        this.audioRing.play();
+        this.score++; // Increment score
+        this.scoreElem.text(this.score); // Display score
+        this.audioRing.play(); // Play sound
     };
 
     /**
      * Play the jump sound for the player
      */
     Game.prototype.jump = function () {
+        // Stop and play the sound
         this.audioJump.pause();
         this.audioJump.currentTime = 0;
         this.audioJump.play();
@@ -163,6 +168,7 @@ window.Game = (function () {
      * Mute or unmute sound
      */
     Game.prototype.toggleSound = function (game) {
+        // Unmute
         if (game.mute) {
             game.speakerElem.removeClass("Mute");
             game.audioBackground.volume = 1.0;
@@ -170,7 +176,9 @@ window.Game = (function () {
             game.audioCrash.volume = 1.0;
             game.audioJump.volume = 1.0;
             game.audioRing.volume = 1.0;
-        } else {
+        }
+        // Mute
+        else {
             game.speakerElem.addClass("Mute");
             game.audioBackground.volume = 0.0;
             game.audioButton.volume = 0.0;
@@ -179,7 +187,7 @@ window.Game = (function () {
             game.audioRing.volume = 0.0;
         }
 
-        game.mute = !game.mute;
+        game.mute = !game.mute; // Toggle flag
     };
 
     /**
@@ -187,7 +195,7 @@ window.Game = (function () {
      */
     Game.prototype.start = function () {
         this.reset();
-        this.scoreElem.show();
+        this.scoreElem.show(); // Show current score
 
         // Restart the onFrame loop
         this.lastFrame = +new Date() / 1000;
@@ -198,7 +206,7 @@ window.Game = (function () {
         if (!this.firstRun) {
             this.audioButton.play();
 
-            // Play background music
+            // Play background music with delay for the button sound effect
             let game = this;
             setTimeout(function () {
                 game.audioBackground.loop = true;
@@ -217,11 +225,13 @@ window.Game = (function () {
     Game.prototype.reset = function () {
         this.player.reset();
 
+        // Reset pipes
         for (let i = 0; i < this.pipes.length; i++) {
             this.pipes[i].active = false;
             this.pipes[i].el.hide();
         }
 
+        // Reset current score
         this.score = 0;
         this.scoreElem.text(0);
     };

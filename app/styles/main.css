@@ -1,114 +1,437 @@
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/main\.scss}line{font-family:\000034}}
+@font-face {
+    font-family: "Press Start 2P";
+    src: url(../fonts/PressStart2P-Regular.ttf);
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/main\.scss;
+    }
+    line {
+        font-family: \000035;
+    }
+}
+
 body {
-  background: black;
+    background: black;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/main\.scss}line{font-family:\000038}}
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/main\.scss;
+    }
+    line {
+        font-family: \000039;
+    }
+}
+
 .browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_game-canvas\.scss}line{font-family:\000032}}
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_cloud\.scss;
+    }
+    line {
+        font-family: \000031;
+    }
+}
+
+.Cloud {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../images/cloud.png") no-repeat;
+    background-size: contain;
+    width: 23em;
+    height: 9.5em;
+    opacity: 0.6;
+    z-index: 0;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_game-canvas\.scss;
+    }
+    line {
+        font-family: \000031;
+    }
+}
+
 .GameCanvas {
-  font-size: 10px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 102.4em;
-  height: 57.6em;
-  margin-left: -51.2em;
-  margin-top: -28.8em;
-  overflow: hidden;
-  background: url("../images/waterfallgrass.gif") no-repeat center center fixed;
-  background-size: cover;
+    font-size: 10px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 102.4em;
+    height: 57.6em;
+    margin-left: -51.2em;
+    margin-top: -28.8em;
+    overflow: hidden;
+    background: url("../images/waterfallgrass.gif") no-repeat center center fixed;
+    background-size: 100% 100%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_player\.scss}line{font-family:\000031}}
-.Player {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: -2.5em;
-  margin-top: -2.5em;
-  width: 5em;
-  height: 5em;
-  background: url("../images/sonic_sprite.png") no-repeat;
-  background-position: 0px 0px;
-  background-size: 5em;
-  transform: translateZ(0);
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_ground\.scss;
+    }
+    line {
+        font-family: \000031;
+    }
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_pipe\.scss}line{font-family:\000031}}
+.Ground {
+    position: absolute;
+    bottom: 0;
+    background: url("../images/ground.png") repeat-x;
+    background-size: auto 10.5em;
+    width: 128.5em;
+    height: 3.5em;
+    z-index: 2;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_pipe\.scss;
+    }
+    line {
+        font-family: \000031;
+    }
+}
+
 .Pipe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: -4em;
-  width: 8em;
-  height: 100%;
-  transform: translateZ(0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -4em;
+    width: 8em;
+    height: 100%;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    z-index: 1;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_pipe\.scss}line{font-family:\0000313}}
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_pipe\.scss;
+    }
+    line {
+        font-family: \0000314;
+    }
+}
+
 .Top,
 .Bot {
-  background-color: red;
+    background: url("../images/stone.jpg");
+    background-size: 75%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss}line{font-family:\000032}}
-.Scoreboard {
-  position: absolute;
-  left: 50%;
-  top: 10em;
-  height: 30em;
-  width: 40em;
-  margin-left: -20em;
-  box-sizing: border-box;
-  background: purple;
-  text-align: center;
-  transform: translate(0, -40em);
-  transition: transform 0.5s;
+@-webkit-keyframes spin {
+    100% {
+        background-position: -44.5em;
+    }
 }
+
+@keyframes spin {
+    100% {
+        background-position: -44.5em;
+    }
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_pipe\.scss;
+    }
+    line {
+        font-family: \0000326;
+    }
+}
+
+.Gap {
+    background: url("../images/ring_sprite.png") no-repeat;
+    background-position-x: left;
+    background-position-y: center;
+    background-size: 45em;
+    -webkit-animation: spin 1s steps(6) infinite;
+    animation: spin 1s steps(6) infinite;
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_pipe\.scss;
+    }
+    line {
+        font-family: \0000335;
+    }
+}
+
+.collectedGap {
+    background: none;
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+@-webkit-keyframes play {
+    100% {
+        background-position: -10em;
+    }
+}
+
+@keyframes play {
+    100% {
+        background-position: -10em;
+    }
+}
+
+@-webkit-keyframes jump {
+    100% {
+        background-position: -25.5em;
+    }
+}
+
+@keyframes jump {
+    100% {
+        background-position: -25.5em;
+    }
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_player\.scss;
+    }
+    line {
+        font-family: \0000313;
+    }
+}
+
+.Player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -2.5em;
+    margin-top: -2.5em;
+    width: 5em;
+    height: 5em;
+    z-index: 3;
+    background: url("../images/sonic_sprite.png") no-repeat;
+    background-position-x: left;
+    background-position-y: center;
+    background-size: 25.5em;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation-name: play;
+    animation-name: play;
+    -webkit-animation-duration: 0.6s;
+    animation-duration: 0.6s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: steps(2);
+    animation-timing-function: steps(2);
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_score\.scss;
+    }
+    line {
+        font-family: \000031;
+    }
+}
+
+.Score {
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    z-index: 4;
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_score\.scss;
+    }
+    line {
+        font-family: \000038;
+    }
+}
+
+.Score>p {
+    position: relative;
+    left: -50%;
+    text-align: center;
+    font-family: "Press Start 2P", cursive;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 5em;
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss;
+    }
+    line {
+        font-family: \000031;
+    }
+}
+
+.Scoreboard {
+    position: absolute;
+    left: 50%;
+    top: 10em;
+    height: 30em;
+    width: 30em;
+    margin-left: -15em;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid black;
+    text-align: center;
+    -webkit-transform: translate(0, -40em);
+    transform: translate(0, -40em);
+    transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+    font-family: "Press Start 2P", cursive;
+    color: white;
+    z-index: 4;
+}
+
 
 /**
  * Reset transform to animate it into the correct spot on the screen.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss}line{font-family:\0000322}}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss;
+    }
+    line {
+        font-family: \0000324;
+    }
+}
+
 .Scoreboard.is-visible {
-  transform: none;
+    -webkit-transform: none;
+    transform: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss}line{font-family:\0000326}}
-.Scoreboard-restart {
-  margin-top: 20em;
-  font-size: inherit;
-  padding: 0.4em 1.5em;
-  border: 0.2em solid white;
-  background: none;
-  cursor: pointer;
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss;
+    }
+    line {
+        font-family: \0000328;
+    }
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss}line{font-family:\0000336}}
-.Scoreboard-restartText {
-  font-family: 'Comic Sans MS', serif;
-  font-size: 2.4em;
-  color: white;
+.Scoreboard>.highscore,
+.Scoreboard>.currentscore {
+    font-size: 1.6em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_score\.scss}line{font-family:\000031}}
-.Score {
-  position: absolute;
-  left: 50%;
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss;
+    }
+    line {
+        font-family: \0000333;
+    }
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_score\.scss}line{font-family:\000036}}
-.Score > p {
-  position: relative;
-  left: -50%;
-  text-align: center;
-  color: white;
-  font-size: 7em;
+.Scoreboard>.highscore {
+    margin-top: 4em;
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss;
+    }
+    line {
+        font-family: \0000339;
+    }
+}
+
+.Scoreboard>button {
+    margin-top: 7em;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 0.8em 1.5em;
+    border: 0.2em solid white;
+    background: none;
+    cursor: pointer;
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_scoreboard\.scss;
+    }
+    line {
+        font-family: \0000349;
+    }
+}
+
+.Scoreboard>button>span {
+    font-family: inherit;
+    font-size: 2.4em;
+    color: white;
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_speaker\.scss;
+    }
+    line {
+        font-family: \000031;
+    }
+}
+
+.Speaker {
+    position: absolute;
+    left: 1em;
+    top: 1em;
+    z-index: 4;
+    background: url("../images/speaker.png") no-repeat center center;
+    background-size: contain;
+    width: 5em;
+    height: 5em;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_speaker\.scss;
+    }
+    line {
+        font-family: \0000313;
+    }
+}
+
+.Speaker:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+
+@media -sass-debug-info {
+    filename {
+        font-family: file\:\/\/\/Users\/hilmar\/Documents\/HR\/Git\/RU\/semester4\/wepo\/WookieFlap\/app\/styles\/_speaker\.scss;
+    }
+    line {
+        font-family: \0000317;
+    }
+}
+
+.Mute {
+    background: url("../images/speaker-mute.png") no-repeat center center;
+    background-size: contain;
+    background-color: rgba(255, 255, 255, 0.4);
 }

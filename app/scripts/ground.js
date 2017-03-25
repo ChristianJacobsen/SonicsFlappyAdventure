@@ -1,7 +1,7 @@
 window.Ground = (function () {
     "use strict";
 
-    var SWEET_SPOT = 75;
+    const SWEET_SPOT = 75;
 
     var Ground = function (el, game) {
         this.el = el;
@@ -10,7 +10,7 @@ window.Ground = (function () {
             x: 0,
             y: 0
         };
-        this.count = 0;
+        this.count = 0; // Count frames, then reset based on sweet spot
     };
 
     Ground.prototype.onFrame = function () {
@@ -24,6 +24,9 @@ window.Ground = (function () {
         this.el.css("transform", "translateZ(0) translate(" + this.pos.x + "em, " + this.pos.y + "em)");
     };
 
+    /**
+     * Checks if the ground should reset it's loop
+     */
     Ground.prototype.checkCollisionWithBounds = function () {
         if (this.count === SWEET_SPOT) {
             this.count = 0;
