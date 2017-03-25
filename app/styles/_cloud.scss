@@ -1,0 +1,12 @@
+.Cloud {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url("../images/cloud.png") no-repeat;
+    background-size: contain;
+    width: em(230px);
+    height: em(95px);
+    opacity: 0.6;
+    z-index: 0;
+    transform: translateZ(0);
+}

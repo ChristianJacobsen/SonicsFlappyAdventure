@@ -1,6 +1,7 @@
 // bower:scss
 // endbower
 @import "../bower_components/compass-sass-mixins/lib/compass";
+@import "variables";
 body {
     background: black;
 }
@@ -12,9 +13,10 @@ body {
     padding: 0.2em 0;
 }
 
+@import "_cloud";
 @import "_game-canvas";
 @import "_ground";
-@import "_player";
 @import "_pipe";
-@import "_scoreboard";
+@import "_player";
 @import "_score";
+@import "_scoreboard";

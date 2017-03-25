@@ -4,6 +4,8 @@ window.Game = (function () {
     var PIPE_TIME = 2;
     var GAP_HEIGHT = 17;
     var PIPE_WIDTH = 8;
+    var CLOUD_COUNT = 4;
+    var PIPE_COUNT = 3;
 
     /**
      * Main game class.
@@ -21,11 +23,17 @@ window.Game = (function () {
         this.nextPipe = 0;
         this.ground = new window.Ground(this.el.find(".Ground"), this);
 
-        let pipe1 = new window.Pipe($(".Pipe1"), this);
-        let pipe2 = new window.Pipe($(".Pipe2"), this);
-        let pipe3 = new window.Pipe($(".Pipe3"), this);
+        this.pipes = [];
 
-        this.pipes = [pipe1, pipe2, pipe3];
+        for (let i = 0; i < PIPE_COUNT; i++) {
+            this.pipes.push(new window.Pipe($(".Pipe" + (i + 1) + ""), this));
+        }
+
+        this.clouds = [];
+
+        for (let i = 0; i < CLOUD_COUNT; i++) {
+            this.clouds.push(new window.Cloud($(".Cloud" + (i + 1) + ""), this));
+        }
 
         // Cache a bound onFrame since we need it each frame.
         this.onFrame = this.onFrame.bind(this);
@@ -62,6 +70,11 @@ window.Game = (function () {
 
         // Update ground
         this.ground.onFrame();
+
+        // Update clouds
+        for (let i = 0; i < this.clouds.length; i++) {
+            this.clouds[i].onFrame();
+        }
 
         // Request next frame.
         window.requestAnimationFrame(this.onFrame);
