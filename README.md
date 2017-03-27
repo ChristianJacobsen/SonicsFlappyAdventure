@@ -29,22 +29,16 @@ Built on a supplied template from our teacher.
 
 ## Getting Started
 
-### Running the game
-
-Simply start up the index.html file in SonicFlappyAdventure/app directory.
-
-Note that the favicon will not be loaded this way, but that is not important.
-
-### Developing the game
-
 In order to continue developing Sonic's Flappy Adventure on your own machine, you will need [node.js](https://nodejs.org/en/download/) in order to use npm to install the dependencies and run the server.
 
 You will also need [Compass](http://compass-style.org/install/) in order to compile the Sass files to CSS.
 It requires [Ruby](http://www.ruby-lang.org/en/downloads/) to run and install. We will not go into detail on how to do that here.
 
-#### Prerequisites
+Note that it is possible to run th game without using Grunt. You will then just have to install the dependencies from from both NPM and Bower and open the index.html file in your web browser. This does result in the favicon being unable to load, but that is not important.
 
-##### Grunt
+### Prerequisites
+
+#### Grunt
 
 Run the following command in order to install Grunt on your machine.
 
@@ -52,7 +46,7 @@ Run the following command in order to install Grunt on your machine.
 $ sudo npm install -g grunt
 ```
 
-##### Bower
+#### Bower
 
 Run the following command in order to install Bower on your machine.
 
@@ -60,7 +54,7 @@ Run the following command in order to install Bower on your machine.
 $ sudo npm install -g bower
 ```
 
-##### Dependencies
+#### Dependencies
 
 Run the following commands in the SonicFlappyAdventure directory (the root directory of the project).
 
@@ -69,7 +63,7 @@ $ npm install
 $ bower install
 ```
 
-#### Running Grunt
+### Running Grunt
 
 You simply call the following command in the root directory of the project in order to start up Grunt which will automatically compile the Sass files and JavaScript files on change.
 

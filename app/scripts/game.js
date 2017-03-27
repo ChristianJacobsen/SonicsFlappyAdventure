@@ -247,6 +247,8 @@ window.Game = (function () {
         this.audioBackground.currentTime = 0;
 
         // Play the crash sound
+        this.audioCrash.pause();
+        this.audioCrash.currentTime = 0;
         this.audioCrash.play();
 
         // Update highscore if applicable
