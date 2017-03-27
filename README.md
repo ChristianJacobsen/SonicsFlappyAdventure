@@ -83,6 +83,7 @@ We use Grunt as our task runner and build system.
 * [The Spriters Resource](https://www.spriters-resource.com/) - Artwork
 * [Freesound](https://www.freesound.org/) - Sound effects
 * [Kevin MacLeod](http://incompetech.com/) - Music
+* [Google Fonts](https://fonts.google.com/) - Font
 * [NPM](https://www.npmjs.com/) - Dependency Management
 * [Bower](https://bower.io/) - Dependency Management
 
